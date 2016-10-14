@@ -6,7 +6,7 @@ Project Name: Overwatch Matchmaker
 
 Team Members: 
 Richard Min ([@richardmin97](https://github.com/richardmin97))
-![richardmin97 photo]()
+![richardmin97 photo](cs174a.richardm.in/face.png)
 
 Grace Tsang ([@GraceTsang](https://github.com/GraceTsang))
 ![GraceTsang photo]()
