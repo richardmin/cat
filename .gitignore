@@ -54,3 +54,6 @@ build-iPhoneSimulator/
 
 # RubyMine IDE generated files
 .idea/
+
+# Don't track running ogs
+log/
