@@ -789,3 +789,32 @@ WHERE fk.referenced_column_name is not null
   AND fk.table_name = 'users'
 [0m
   [1m[35m (0.1ms)[0m  SHOW CREATE TABLE `users`
+
+
+Started GET "/" for ::1 at 2016-10-20 12:47:40 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (7.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+
+ActionController::RoutingError (undefined method `skip' for AuthenticationController:Class):
+  app/controllers/application_controller.rb:12:in `<class:AuthenticationController>'
+  app/controllers/application_controller.rb:11:in `<top (required)>'
+
+
+  Rendered /Users/RichardMin/.rvm/gems/ruby-2.3.0@global/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.7ms)
+  Rendered /Users/RichardMin/.rvm/gems/ruby-2.3.0@global/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.0ms)
+  Rendered /Users/RichardMin/.rvm/gems/ruby-2.3.0@global/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (8.8ms)
+  Rendered /Users/RichardMin/.rvm/gems/ruby-2.3.0@global/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (8.8ms)
+  Rendered /Users/RichardMin/.rvm/gems/ruby-2.3.0@global/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (86.2ms)
+  Rendered /Users/RichardMin/.rvm/gems/ruby-2.3.0@global/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.5ms)
+  Rendered /Users/RichardMin/.rvm/gems/ruby-2.3.0@global/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/RichardMin/.rvm/gems/ruby-2.3.0@global/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/RichardMin/.rvm/gems/ruby-2.3.0@global/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/RichardMin/.rvm/gems/ruby-2.3.0@global/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (59.0ms)
+  Rendered /Users/RichardMin/.rvm/gems/ruby-2.3.0@global/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/RichardMin/.rvm/gems/ruby-2.3.0@global/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/RichardMin/.rvm/gems/ruby-2.3.0@global/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (123.0ms)
+
+
+Started PUT "/__web_console/repl_sessions/a2f86956d5644aec50fcd908a3eab242" for ::1 at 2016-10-20 12:47:51 -0700
+
+
+Started PUT "/__web_console/repl_sessions/a2f86956d5644aec50fcd908a3eab242" for ::1 at 2016-10-20 12:47:52 -0700
