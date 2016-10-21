@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 end
 
 class AuthenticationController < ApplicationController
-  skip before_filter :authenticate_user!
+  skip_before_filter :authenticate_user!
 
   def login
 
