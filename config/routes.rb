@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     get "/login" => "devise/sessions#new"
     delete "/logout" => "devise/sessions#destroy"
     get "/sign_up" => "devise/registrations#new"
+    get "/edit" => "devise/registrations#edit"
   end
 
 end
