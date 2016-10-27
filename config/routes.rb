@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-  get 'teams/new'
-
   devise_for :users
 
   root 'static_pages#home'
   get '/help', to: 'static_pages#help'
+  
+  get 'teams/new'
   resources :teams
   
   devise_scope :user do
