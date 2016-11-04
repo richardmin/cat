@@ -3,7 +3,12 @@ Rails.application.routes.draw do
 
   root 'static_pages#home'
   get '/help', to: 'static_pages#help'
-
+  
+  get '/join_game', to: 'static_pages#join_game'
+    
+  resources :teams, only: [:new]
+  
+  
   devise_scope :user do
     get "/login" => "devise/sessions#new"
     delete "/logout" => "devise/sessions#destroy"

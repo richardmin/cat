@@ -1,12 +1,15 @@
 source 'https://rubygems.org'
 
+#To seed database with fake users
+gem 'faker', '1.6.6'
+
 gem 'devise', '4.2.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use mysql as the database for Active Record
-group :development do
+#group :development do
     gem 'mysql2', '>= 0.3.13'
-end
+#end
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets

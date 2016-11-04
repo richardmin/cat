@@ -1,4 +1,5 @@
-create_fixtures['RAILS_ENV'] ||= 'test'
+#create_fixtures['RAILS_ENV'] ||= 'test'
+ENV['RAILS_ENV'] ||='test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 

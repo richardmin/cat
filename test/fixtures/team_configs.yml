@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  description: MyString
+  num_support: 1
+  num_tank: 1
+  num_DPS: 1
+
+two:
+  description: MyString
+  num_support: 1
+  num_tank: 1
+  num_DPS: 1
