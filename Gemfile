@@ -8,7 +8,7 @@ gem 'devise', '4.2.0'
 gem 'rails', '4.2.6'
 # Use mysql as the database for Active Record
 #group :development do
-#    gem 'mysql2', '>= 0.3.13'
+    gem 'mysql2', '>= 0.3.13'
 #end
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
