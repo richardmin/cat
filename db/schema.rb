@@ -11,7 +11,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161021033706) do
+ActiveRecord::Schema.define(version: 20161104060533) do
+
+  create_table "team_configs", force: :cascade do |t|
+    t.string   "description", limit: 255
+    t.integer  "num_support", limit: 4
+    t.integer  "num_tank",    limit: 4
+    t.integer  "num_DPS",     limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "team_config_id", limit: 4
+  end
+
+  add_index "teams", ["team_config_id"], name: "index_teams_on_team_config_id", using: :btree
+
+  create_table "user_looking_for_teams", force: :cascade do |t|
+    t.string   "role",               limit: 255
+    t.datetime "time_queue_started"
+    t.integer  "user_id",            limit: 4
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "user_looking_for_teams", ["user_id"], name: "index_user_looking_for_teams_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -33,4 +60,6 @@ ActiveRecord::Schema.define(version: 20161021033706) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "teams", "team_configs"
+  add_foreign_key "user_looking_for_teams", "users"
 end

@@ -7,4 +7,10 @@
   </h2>
 
   <%= link_to "Sign up now!", sign_up_path, class: "btn btn-lg btn-primary" %>
+  
+  <% if user_signed_in? %>
+	<%= link_to "Join Game!", join_game_path, class: "btn btn-lg btn-primary" %>
+  <% else %>
+    <%= link_to "Join Game!", login_path, class: "btn btn-lg btn-primary" %>
+  <% end %>
 </div>
