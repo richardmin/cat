@@ -54,6 +54,11 @@ class Team < ActiveRecord::Base
 	tank_users.each { |user| team_users.push(user) }
 	dps_users.each { |user| team_users.push(user) }
 	
+  #team must be 6 people
+  if team_users.size != 6
+    return nil
+  end
+  
 	#remove the just added people from the queue
 	support_users.each { |user| UserLookingForTeam.destroy(user) }
 	dps_users.each { |user| UserLookingForTeam.destroy(user) }
