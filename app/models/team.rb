@@ -1,29 +1,58 @@
 class Team < ActiveRecord::Base
   validates :team_type, presence: true
-  #has_many users
-  has_one :user1, class_name: 'User'
-  has_one :user2, class_name: 'User'
-  has_one :user3, class_name: 'User'
-  has_one :user4, class_name: 'User'
-  has_one :user5, class_name: 'User'
-  has_one :user6, class_name: 'User'
+  #serialize :users, Array    #maybe use this to store array of users in team table
+  #has_many :users
+  #has_one :user1, class_name: 'User'
+  #has_one :user2, class_name: 'User'
+  #has_one :user3, class_name: 'User'
+  #has_one :user4, class_name: 'User'
+  #has_one :user5, class_name: 'User'
+  #has_one :user6, class_name: 'User'
   belongs_to :team_type
   
-  def self.create_for(teamConfig)
-    return nil if users.empty? or users.count < 5
+  def self.new_for(teamConfig, first_user)
+    return nil if User.count < 6
     # users = User.find_by(rank: rank)
     # users = User.find_by(looking: true).sort(ascending)
+
+    num_support_needed =  teamConfig.num_support
+    num_tank_needed =     teamConfig.num_tank
+    num_DPS_needed =      teamConfig.num_DPS
+
+    if (first_user.role == nil || first_user.role == "support")
+      num_support_needed -= 1
+    elsif (first_user.role == "tank")
+      num_tank_needed -= 1
+    elsif (first_user.role == "DPS")
+      num_DPS_needed -= 1
+    end
+    team_users = []
+    #team_users.push(first_user.id)
+    team_users.push(first_user)
     
-    support_users = User.where(role: "support")
-    support_users = support_users.slice(0, teamConfig.num_support)
+    support_users = User.where(role: "support", role: nil)      #if no role specified, role = support as default
+    support_users = support_users.slice(0, num_support_needed)
+    #support_users.each { |user| team_users.push(user.id) }
+    support_users.each { |user| team_users.push(user) }
     
     tank_users = User.where(role: "tank")
-    tank_users = tank_users.slice(0, teamConfig.num_tank)
+    tank_users = tank_users.slice(0, num_tank_needed)
+    #tank_users.each { |user| team_users.push(user.id) }
+    tank_users.each { |user| team_users.push(user) }
     
     dps_users = User.where(role: "DPS")
-    dps_users = dps_users.slice(0, teamConfig.num_users)
-    
-    team_users = support_users + tank_users + dps_users
-    team = Team.create(team_config_id: teamConfig.id, user: team_users)
+    dps_users = dps_users.slice(0, num_DPS_needed)
+    #dps_users.each { |user| team_users.push(user.id) }
+    dps_users.each { |user| team_users.push(user) }
+
+#    team_users = first_user, support_users, tank_users, dps_users
+    if (team_users.size != 6)
+      #flash[:error] = "Not 6 people???? HOw??."
+      #redirect_to help_url
+      #return nil
+      return nil
+    end
+    return team_users
+#    team = Team.new(team_config_id: teamConfig.id, users: team_users)
   end
 end
