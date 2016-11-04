@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161104060533) do
+ActiveRecord::Schema.define(version: 20161104092845) do
 
   create_table "team_configs", force: :cascade do |t|
     t.string   "description", limit: 255
@@ -54,8 +54,11 @@ ActiveRecord::Schema.define(version: 20161104060533) do
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
     t.string   "bracket",                limit: 255
+    t.string   "battlenetid",            limit: 255
+    t.string   "region",                 limit: 255
   end
 
+  add_index "users", ["battlenetid"], name: "index_users_on_battlenetid", unique: true, using: :btree
   add_index "users", ["bracket"], name: "index_users_on_bracket", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
