@@ -5,7 +5,7 @@ class TeamsController < ApplicationController
   
   def new
 #    @team = Team.new(params[team_params])
-    teamConfig = TeamConfig.second #can change between default team configuration. see db/seeds.rb
+    teamConfig = TeamConfig.first #can change between default team configuration. see db/seeds.rb
     @team = Team.new_for(teamConfig, current_user)
     if @team.nil?
       flash[:error] = "Team could not be created."

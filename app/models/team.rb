@@ -23,33 +23,37 @@ class Team < ActiveRecord::Base
       num_support_needed -= 1
     elsif (first_user.role == "tank")
       num_tank_needed -= 1
-    elsif (first_user.role == "DPS")
+    elsif (first_user.role == "dps")
       num_DPS_needed -= 1
     end
     team_users = []
     #team_users.push(first_user.id)
     team_users.push(first_user)
     
-    support_users = User.where(role: "support", role: nil)      #if no role specified, role = support as default
+    #if no role specified, role = support as default
+    support_users = User.where.not(id: first_user.id).where(role: "support")      
     support_users = support_users.slice(0, num_support_needed)
-    #support_users.each { |user| team_users.push(user.id) }
     support_users.each { |user| team_users.push(user) }
+    if ( support_users.size < num_support_needed )
+      num_support_needed -= support_users.size
+      nil_users = User.where.not(id: first_user.id).where(role: nil)
+      nil_users = nil_users.slice(0, num_support_needed)
+      nil_users.each { |user| team_users.push(user) }
+    end
     
-    tank_users = User.where(role: "tank")
+    
+    tank_users = User.where.not(id: first_user.id).where(role: "tank")
     tank_users = tank_users.slice(0, num_tank_needed)
-    #tank_users.each { |user| team_users.push(user.id) }
     tank_users.each { |user| team_users.push(user) }
     
-    dps_users = User.where(role: "DPS")
+    dps_users = User.where.not(id: first_user.id).where(role: "dps")
     dps_users = dps_users.slice(0, num_DPS_needed)
-    #dps_users.each { |user| team_users.push(user.id) }
     dps_users.each { |user| team_users.push(user) }
 
 #    team_users = first_user, support_users, tank_users, dps_users
     if (team_users.size != 6)
       #flash[:error] = "Not 6 people???? HOw??."
       #redirect_to help_url
-      #return nil
       return nil
     end
     return team_users

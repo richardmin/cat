@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+#To seed database with fake users
+gem 'faker', '1.6.6'
+
 gem 'devise', '4.2.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'

@@ -44,7 +44,6 @@ ActiveRecord::Schema.define(version: 20161102012344) do
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
     t.string   "bracket",                limit: 255
-    t.string   "role",                   limit: 255
   end
 
   add_index "users", ["bracket"], name: "index_users_on_bracket", unique: true, using: :btree

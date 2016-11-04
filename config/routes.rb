@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   get '/help', to: 'static_pages#help'
   
   resources :teams, only: [:new]
-    
+  
+  
   devise_scope :user do
     get "/login" => "devise/sessions#new"
     delete "/logout" => "devise/sessions#destroy"
