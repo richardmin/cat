@@ -14,5 +14,6 @@ Rails.application.routes.draw do
     get "/sign_up" => "devise/registrations#new"
     get "/edit" => "devise/registrations#edit"
   end
-
+ 
+  resources :comments, only: [:new, :create, :index]
 end
