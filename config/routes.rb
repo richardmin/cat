@@ -5,9 +5,8 @@ Rails.application.routes.draw do
   get '/help', to: 'static_pages#help'
   
   get '/join_game', to: 'static_pages#join_game'
-    
+  resources :users, :only => [:show]
   resources :teams, only: [:new]
-  
   
   devise_scope :user do
     get "/login" => "devise/sessions#new"
@@ -15,5 +14,6 @@ Rails.application.routes.draw do
     get "/sign_up" => "devise/registrations#new"
     get "/edit" => "devise/registrations#edit"
   end
-
+ 
+  resources :comments, only: [:new, :create, :index]
 end

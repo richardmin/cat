@@ -6,7 +6,12 @@ class TeamsController < ApplicationController
   
   def new()
 	
-	UserLookingForTeam.create( :user_id => current_user.id, :role => params[:role].to_s, :time_queue_started => 0)
+	#if UserLookingForTeam.where( user_id: current_user.id).count != 0
+	#	flash[:error] = "already in queue "
+	#	redirect_to join_game_url 
+	#	return
+	#end
+	UserLookingForTeam.create( :user_id => current_user.id, :role => params[:role].to_s, :time_queue_started => Time.now)
 	
     teamConfig = TeamConfig.first #can change between default team configuration. see db/seeds.rb
 	
@@ -21,7 +26,12 @@ class TeamsController < ApplicationController
   end
   
   def checkTeam()
-	return "hello"
+	if UserLookingForTeam.where(user_id: current_user.id).count == 0 
+		flash[:error] = "Done"
+		return true
+	end
+	flash[:error] = "Waiting"
+	return false
   end
      
   private

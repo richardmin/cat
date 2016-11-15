@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161104060533) do
+ActiveRecord::Schema.define(version: 20161113234849) do
+
+  create_table "comments", force: :cascade do |t|
+    t.text     "body",       limit: 65535
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "team_configs", force: :cascade do |t|
     t.string   "description", limit: 255
@@ -26,6 +35,12 @@ ActiveRecord::Schema.define(version: 20161104060533) do
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.integer  "team_config_id", limit: 4
+    t.integer  "user1",          limit: 4
+    t.integer  "user2",          limit: 4
+    t.integer  "user3",          limit: 4
+    t.integer  "user4",          limit: 4
+    t.integer  "user5",          limit: 4
+    t.integer  "user6",          limit: 4
   end
 
   add_index "teams", ["team_config_id"], name: "index_teams_on_team_config_id", using: :btree
@@ -54,12 +69,16 @@ ActiveRecord::Schema.define(version: 20161104060533) do
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
     t.string   "bracket",                limit: 255
+    t.string   "battlenetid",            limit: 255
+    t.string   "region",                 limit: 255
   end
 
+  add_index "users", ["battlenetid"], name: "index_users_on_battlenetid", unique: true, using: :btree
   add_index "users", ["bracket"], name: "index_users_on_bracket", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "comments", "users"
   add_foreign_key "teams", "team_configs"
   add_foreign_key "user_looking_for_teams", "users"
 end
