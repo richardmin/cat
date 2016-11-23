@@ -32,6 +32,7 @@ class Team < ActiveRecord::Base
 		num_tank_users < num_tank_needed || 
 		num_dps_users < num_DPS_needed 
 			return "not enough people, roles in queue: " + num_dps_users.to_s + "  " + num_tank_users.to_s + "    " + num_support_users.to_s
+			return
 	end
 			
 	
@@ -45,12 +46,7 @@ class Team < ActiveRecord::Base
 	support_users.each { |user| team_users.push(user) }
 	tank_users.each { |user| team_users.push(user) }
 	dps_users.each { |user| team_users.push(user) }
-	
-    #team must be 6 people
-	if team_users.size != 6
-		return "not 6 people"
-	end
-  
+	  
 	#remove the just added people from the queue
 	support_users.each { |user| UserLookingForTeam.destroy(user) }
 	dps_users.each { |user| UserLookingForTeam.destroy(user) }
@@ -63,7 +59,8 @@ class Team < ActiveRecord::Base
 		:user2 => team_users[1].user_id, :user3 => team_users[2].user_id, :user4 => team_users[3].user_id,
 		:user5 => team_users[4].user_id, :user6 => team_users[5].user_id)
 	if ( !t.valid? )
-		return teamConfig.id
+		#return teamConfig.id
+		return
 	end
 	
 	

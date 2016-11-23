@@ -1,19 +1,30 @@
+ready = ->
+
 window.TeamPoller = {
-  poll: (timeout, id) ->
-    found = false
+  poll: (timeout) ->
     if timeout is 0
-      found = TeamPoller.request()
+      TeamPoller.request()
     else
       this.pollTimeout = setTimeout ->
-        found = TeamPoller.request()
-      , timeout || 5000
-    if found == true
-        alert("hello");
+        TeamPoller.request()
+      , timeout || 3000
+       
   clear: -> clearTimeout(this.pollTimeout)
   request: ->
-    $.get('/teams/checkTeam')
+    $.ajax 'teams/checkTeam',
+        type: 'GET'
+        dataType: 'json'
+        error: (jqXHR, textStatus, errorThrown) ->
+            $('body').append ""
+        success: (data, textStatus, jqXHR) ->
+            $('body').append "looking for team"
+            if data != -1
+                window.location = "/comments/new?team=" + data
 }
 
 jQuery ->
   TeamPoller.poll() if true
   return
+
+$(document).ready(ready)
+$(document).on('page:load', ready)
