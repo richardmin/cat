@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd ~/cat/load_tests
-tsung -n -f login.xml start
+tsung -n -f $0  start
 if [ $? -eq 0 ]; then
     cd /home/ec2-user/.tsung/log
     cd $( ls -1 | tail -1 )
