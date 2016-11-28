@@ -1,5 +1,3 @@
-ready = ->
-
 window.TeamPoller = {
   poll: (timeout) ->
     if timeout is 0
@@ -7,24 +5,28 @@ window.TeamPoller = {
     else
       this.pollTimeout = setTimeout ->
         TeamPoller.request()
-      , timeout || 3000
+      , timeout || 1000
        
   clear: -> clearTimeout(this.pollTimeout)
   request: ->
-    $.ajax 'teams/checkTeam',
+    $.ajax '/teams/checkTeam',
         type: 'GET'
         dataType: 'json'
         error: (jqXHR, textStatus, errorThrown) ->
-            $('body').append ""
+            $('body').append jqXHR.responseText
         success: (data, textStatus, jqXHR) ->
-            $('body').append "looking for team"
-            if data != -1
-                window.location = "/comments/new?team=" + data
+            #$('body').append data
+            if data != -1 
+                if window.location.pathname == "/teams/new"
+                    window.location = "/comments/new?team=" + data
+                else
+                    TeamPoller.poll()
+            else
+                TeamPoller.poll()
 }
 
 jQuery ->
   TeamPoller.poll() if true
+  #TeamPoller.poll() if $('#comments').size() > 0
   return
 
-$(document).ready(ready)
-$(document).on('page:load', ready)

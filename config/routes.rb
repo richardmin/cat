@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get '/help', to: 'static_pages#help'
   
   get '/join_game', to: 'static_pages#join_game'
-  
+
   resources :teams do
   collection do
     get 'checkTeam'
