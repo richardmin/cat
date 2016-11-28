@@ -7,7 +7,11 @@ class TeamsController < ApplicationController
 def new
 	respond_to do |format|
 
+<<<<<<< HEAD
 		#check if the user is already waiting, if so - delete their current entry in usersWaiting to replace it
+=======
+			#check if the user is already waiting, if so - delete their current entry in usersWaiting to replace it
+>>>>>>> origin/modeling-teams
 		a = UserLookingForTeam.where( user_id: current_user.id)
 		if a.count != 0
 			a.delete_all 
@@ -21,12 +25,21 @@ def new
 		Team.where(user5: current_user.id).delete_all
 		Team.where(user6: current_user.id).delete_all
 		
+<<<<<<< HEAD
 		#add user to looking table
 		UserLookingForTeam.create( :user_id => current_user.id, :role => params[:role].to_s, :time_queue_started => Time.now)
 =begin		
 		teamConfig = TeamConfig.first #can change between default team configuration. see db migrations for queue	
 			@team = Team.new_for(teamConfig)
 
+=======
+		UserLookingForTeam.create( :user_id => current_user.id, :role => params[:role].to_s, :time_queue_started => Time.now)
+		
+			teamConfig = TeamConfig.first #can change between default team configuration. see db migrations for queue
+		
+			@team = Team.new_for(teamConfig)
+=begin
+>>>>>>> origin/modeling-teams
 			if @team.nil?
 				flash[:error] = "Queueing as role " + params[:role]
 				redirect_to join_game_url
@@ -34,6 +47,7 @@ def new
 				flash[:success] = @team
 				redirect_to join_game_url #redirect_to_chat?
 			end
+<<<<<<< HEAD
 
 			flash[:error] = "Queueing as role " + params[:role]
 			flash[:success] = @team
@@ -41,6 +55,12 @@ def new
 
 			#load polling
 			format.js { render :content_type => 'text/javascript' }
+=======
+=end
+			flash[:error] = "Queueing as role " + params[:role]
+			flash[:success] = @team 
+			format.js { render :content_type => 'text/javascript' }			
+>>>>>>> origin/modeling-teams
 			format.html 
 
 	end
