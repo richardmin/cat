@@ -34,19 +34,11 @@ end
 
 users = User.order(:created_at)
 for i in users
-<<<<<<< HEAD
-  if  i.id < 2
-    UserLookingForTeam.create!(role: "tank", time_queue_started: Time.zone.now, user_id: i.id)
-  elsif  i.id < 4 
-    UserLookingForTeam.create!(role: "dps", time_queue_started: Time.zone.now, user_id: i.id)
-  elsif  i.id < 6
-=======
   if  i.id < 20
     UserLookingForTeam.create!(role: "tank", time_queue_started: Time.zone.now, user_id: i.id)
   elsif  i.id < 40 
     UserLookingForTeam.create!(role: "dps", time_queue_started: Time.zone.now, user_id: i.id)
   else
->>>>>>> origin/modeling-teams
     UserLookingForTeam.create!(role: "support", time_queue_started: Time.zone.now, user_id: i.id)
   end
 end
