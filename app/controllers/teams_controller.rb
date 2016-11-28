@@ -4,39 +4,50 @@ class TeamsController < ApplicationController
   end
   
   
-  def new()
-	
-	#check if the user is already waiting, if so - delete their current entry in usersWaiting to replace it
-	#a = UserLookingForTeam.where( user_id: current_user.id)
-	#if a.count != 0
-	#	a.delete_all 
-	#end
-	
-	#delete old teams that the user belonged to before starting a new queue
-	Team.where(user1: current_user.id).delete_all
-	Team.where(user2: current_user.id).delete_all
-	Team.where(user3: current_user.id).delete_all
-	Team.where(user4: current_user.id).delete_all
-	Team.where(user5: current_user.id).delete_all
-	Team.where(user6: current_user.id).delete_all
-	
-	UserLookingForTeam.create( :user_id => current_user.id, :role => params[:role].to_s, :time_queue_started => Time.now)
-	
-    teamConfig = TeamConfig.first #can change between default team configuration. see db/seeds.rb
-	
-    @team = Team.new_for(teamConfig, current_user)
-    if @team.nil?
-      flash[:error] = "Queueing as role " + params[:role]
-      redirect_to join_game_url
-    else
-      flash[:success] = @team
-      redirect_to join_game_url #redirect_to_chat?
-    end
-  end
+def new
+	respond_to do |format|
+
+			#check if the user is already waiting, if so - delete their current entry in usersWaiting to replace it
+		a = UserLookingForTeam.where( user_id: current_user.id)
+		if a.count != 0
+			a.delete_all 
+		end
+		
+		#delete old teams that the user belonged to before starting a new queue
+		Team.where(user1: current_user.id).delete_all
+		Team.where(user2: current_user.id).delete_all
+		Team.where(user3: current_user.id).delete_all
+		Team.where(user4: current_user.id).delete_all
+		Team.where(user5: current_user.id).delete_all
+		Team.where(user6: current_user.id).delete_all
+		
+		UserLookingForTeam.create( :user_id => current_user.id, :role => params[:role].to_s, :time_queue_started => Time.now)
+		
+			teamConfig = TeamConfig.first #can change between default team configuration. see db migrations for queue
+		
+			@team = Team.new_for(teamConfig)
+=begin
+			if @team.nil?
+				flash[:error] = "Queueing as role " + params[:role]
+				redirect_to join_game_url
+			else
+				flash[:success] = @team
+				redirect_to join_game_url #redirect_to_chat?
+			end
+=end
+			flash[:error] = "Queueing as role " + params[:role]
+			flash[:success] = @team 
+			format.js { render :content_type => 'text/javascript' }			
+			format.html 
+
+	end
+end
   
-  def checkTeam()
-    
-	@checkTeam = -1
+
+
+
+def checkTeam()
+  @checkTeam = -1
 	check1 = Team.find_by(user1: current_user.id)
 	check2 = Team.find_by(user2: current_user.id)
 	check3 = Team.find_by(user3: current_user.id)

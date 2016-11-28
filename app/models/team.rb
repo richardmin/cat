@@ -3,7 +3,7 @@ class Team < ActiveRecord::Base
   belongs_to :team_type
   
   
-  def self.new_for(teamConfig, first_user)
+  def self.new_for(teamConfig)
   
     # users = User.find_by(rank: rank)
     # users = User.find_by(looking: true).sort(ascending)
@@ -15,7 +15,7 @@ class Team < ActiveRecord::Base
 	@tank_users = []
 	
 	
-	support_users = UserLookingForTeam.where(role: "support")      #if no role specified, role = support as default
+	support_users = UserLookingForTeam.where(role: "support")      
     num_support_users = support_users.count
 	
     tank_users = UserLookingForTeam.where(role: "tank")
@@ -60,7 +60,7 @@ class Team < ActiveRecord::Base
 		:user5 => team_users[4].user_id, :user6 => team_users[5].user_id)
 	if ( !t.valid? )
 		#return teamConfig.id
-		return
+		return nil
 	end
 	
 	

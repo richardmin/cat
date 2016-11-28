@@ -13,10 +13,32 @@ config_optimal = TeamConfig.create({
   :num_DPS     => 2
 })
 
-config_all_support_hehe = TeamConfig.create({
+config_all_support = TeamConfig.create({
   :description => 'Screwed I guess',
   :num_support => 6,
   :num_tank    => 0,
   :num_DPS     => 0
 })
 
+
+User.create!(email: "example@railstutorial.org",
+             password:              "foobar")
+
+99.times do |n|
+  email = "example-#{n+1}@railstutorial.org"
+  password = "password"
+  User.create!(email: email,
+               password: password)
+end
+
+
+users = User.order(:created_at)
+for i in users
+  if  i.id < 20
+    UserLookingForTeam.create!(role: "tank", time_queue_started: Time.zone.now, user_id: i.id)
+  elsif  i.id < 40 
+    UserLookingForTeam.create!(role: "dps", time_queue_started: Time.zone.now, user_id: i.id)
+  else
+    UserLookingForTeam.create!(role: "support", time_queue_started: Time.zone.now, user_id: i.id)
+  end
+end
