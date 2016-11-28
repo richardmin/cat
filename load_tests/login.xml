@@ -76,9 +76,11 @@
 
             <thinktime value="5" random="true"></thinktime>
 
+            <!-- todo: generate this better -->
             <setdynvars sourcetype="random_number" start="1000" end="9999999">
                 <var name="random_user_email" />
             </setdynvars>
+            
 
             <request>
                 <dyn_variable name='authenticity_token'></dyn_variable>
@@ -93,7 +95,7 @@
             </setdynvars> 
 
             <request subst="true">
-                <http url='/users' method='POST' version='1.1' contents="authenticity_token=%%_authenticity_token%%&amp;user[email]=tester@test.com&amp;user[password]=tester&amp;user[remember_me]=0" content_type="application/x-www-form-urlencoded"> </http>
+                <http url='/users' method='POST' version='1.1' contents="utf8=%E2%9C%93&amp;authenticity_token=%%_authenticity_token%%&amp;user[email]=tester@test.com&amp;user[password]=tester&amp;user[password_confirmation]" content_type="application/x-www-form-urlencoded"> </http>
             </request>
 
         </session>
