@@ -6,7 +6,7 @@ class TeamsController < ApplicationController
   
   
 	def new
-			#check if the user is already waiting, if so - delete their current entry in usersWaiting to replace it
+		#check if the user is already waiting, if so - delete their current entry in usersWaiting to replace it
 		a = UserLookingForTeam.where( user_id: current_user.id)
 		if a.count != 0
 			a.delete_all 
@@ -20,29 +20,31 @@ class TeamsController < ApplicationController
 		Team.where(user5: current_user.id).delete_all
 		Team.where(user6: current_user.id).delete_all
 		
+		#add user to looking table
 		UserLookingForTeam.create( :user_id => current_user.id, :role => params[:role].to_s, :time_queue_started => Time.now)
-		
-			teamConfig = TeamConfig.first #can change between default team configuration. see db migrations for queue
-		
-			@team = Team.new_for(teamConfig)
+
+		teamConfig = TeamConfig.first #can change between default team configuration. see db migrations for queue	
+		@team = Team.new_for(teamConfig)
 =begin
-				if @team.nil?
-					flash[:error] = "Queueing as role " + params[:role]
-					redirect_to join_game_url
-				else
-					flash[:success] = @team
-					redirect_to join_game_url #redirect_to_chat?
-				end
+		if @team.nil?
+			flash[:error] = "Queueing as role " + params[:role]
+			redirect_to join_game_url
+		else
+			flash[:success] = @team
+			redirect_to join_game_url #redirect_to_chat?
+		end
 =end
 		respond_to do |format|
 			flash[:error] = "Queueing as role " + params[:role]
 			flash[:success] = @team 
 			format.html	
 		end
+
 	end
   
 
-	def search
+
+	def checkTeam()
 		@checkTeam = -1
 		check1 = Team.find_by(user1: current_user.id)
 		check2 = Team.find_by(user2: current_user.id)

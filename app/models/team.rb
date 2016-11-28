@@ -32,7 +32,6 @@ class Team < ActiveRecord::Base
 		num_tank_users < num_tank_needed || 
 		num_dps_users < num_DPS_needed 
 			return "not enough people, roles in queue: " + num_dps_users.to_s + "  " + num_tank_users.to_s + "    " + num_support_users.to_s
-			return
 	end
 			
 	

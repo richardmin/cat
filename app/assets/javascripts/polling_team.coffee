@@ -1,5 +1,3 @@
-ready = ->
-
 window.TeamPoller = {
   poll: (timeout) ->
     if timeout is 0
@@ -11,7 +9,7 @@ window.TeamPoller = {
        
   clear: -> clearTimeout(this.pollTimeout)
   request: ->
-    $.ajax '/teams/search',
+    $.ajax '/teams/checkTeam',
         type: 'GET'
         dataType: 'json'
         error: (jqXHR, textStatus, errorThrown) ->
@@ -24,6 +22,4 @@ window.TeamPoller = {
               if window.location.pathname == "/teams/new" #this makes it so that you only poll in teams/new
                 TeamPoller.poll()
 }
-
-
 
