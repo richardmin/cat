@@ -1,0 +1,109 @@
+ <sessions>
+        <session name="user-registration-not-inline" probability="100" type="ts_http">
+            <!-- go to homepage, wait 2 seconds -->
+            <request>
+                <http url='/' version='1.1' method='GET'></http>
+            </request>
+
+            <thinktime value="2" random="true"></thinktime>
+
+            <!-- sign up with random email -->
+            <request>
+                <http url='/users/sign_up' version='1.1' method='GET'></http>
+            </request>
+
+            <thinktime value="5" random="true"></thinktime>
+
+            <setdynvars sourcetype="random_number" start="1000" end="9999999">
+                <var name="random_user_email" />
+            </setdynvars>
+
+            <request>
+                <dyn_variable name='authenticity_token'></dyn_variable>
+                <http url='/users/sign_up' version='1.1' method='GET'></http>
+            </request>
+
+            <setdynvars sourcetype="eval"
+                        code='fun({Pid,DynVars})->
+                                {ok,Val}=ts_dynvars:lookup(authenticity_token,DynVars),
+                                re:replace(Val,"[+]","%2B",[global, {return,list}]) end.'>
+                <var name="authenticity_token" />
+            </setdynvars> 
+
+            <request subst="true">
+                <http url='/users' method='POST' version='1.1' contents="authenticity_token=%%_authenticity_token%%&amp;user[email]=tester@test.com&amp;user[password]=tester&amp;user[remember_me]=0" content_type="application/x-www-form-urlencoded"> </http>
+            </request>
+            
+            
+            <!-- wait 1 second, then go to the join game page -->
+            <thinktime value="1" random="true"></thinktime>
+            
+            <request>
+                <http url='/join_game' version='1.1' method='GET'></http>
+            </request>
+            
+            <!-- wait 1 second, then queue up with a random role -->
+            <setdynvars sourcetype="random_number" start="1" end="3">
+                <var name="random_role" />
+            </setdynvars>
+            
+            <if var="random_role" eq="1">
+              <request> <http url="/teams/new?role=dps"/> </request>
+            </if>
+            
+            <if var="random_role" eq="2">
+              <request> <http url="/teams/new?role=tank"/> </request>
+            </if>
+            
+            <if var="random_role" eq="3">
+              <request> <http url="/teams/new?role=support"/> </request>
+            </if>
+            
+
+            <!-- send checkTeam requests until team is ready-->
+            <repeat name="myloop" max_repeat="50">
+              
+              <request>
+                  <dyn_variable name="result" re="Result: (.*)"/>
+                  <http url="/teams/checkTeam" method="GET" version="1.1"></http>
+              </request>
+              
+              <thinktime value="1" random="true"></thinktime>
+              
+              <until var="result" neq="-1"/>
+            </repeat>
+            
+            
+            <!-- poll and comment loop -->
+            <for from="1" to="5" incr="1" var="counter">
+                
+                <!-- poll n times for every comment -->
+                <for from="1" to="4" incr="1" var="counter">
+                
+                    <!-- show all comments, since after_id is javascript -->
+                    <request> <http url="/comments?after_id=1/"/> </request>
+                    
+                    <!-- polling interval -->
+                    <thinktime value="1" random="true"></thinktime>
+                </for>
+                
+                
+                <!-- submit random comment -->
+                <setdynvars sourcetype="random_string" length="20">
+                    <var name="random_comment" />
+                </setdynvars>
+                
+                <request subst="true">
+                    <http
+                        url='/comments/'
+                        version='1.1'
+                        method='POST'
+                        contents='utf8=%E2%9C%93&amp;authenticity_token=%%_authenticity_token%%&amp;3D%3D&comment%5Bbody%5D=%%random_comment%%&amp;commit=Post'>
+                    </http>
+                </request>
+                
+            </for>
+            
+            
+        </session>
+    </sessions>
