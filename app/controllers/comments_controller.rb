@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   def index
-    @comments = Comment.where('id > ?', params[:after_id].to_i).order('created_at DESC')
+    @comments = Comment.where('id > ?', params[:after_id].to_i).where('team_id = ?', params[:team_id].to_i).order('created_at DESC')
   end
 
   def new
@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
         format.js
       else
         format.html {redirect_to new_comment_path}
-        format.js {render nothing: true}
+        format.js {render :content_type => 'text/javascript'}
       end
     end
   end

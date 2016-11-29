@@ -24,14 +24,4 @@ Rails.application.routes.draw do
  
   resources :comments, only: [:new, :create, :index]
 
-  resources :comments do
-    member do
-      get 'new'
-    end
-  end
-=begin
-  resources :teams do
-    resources :comments
-  end
-=end
 end

@@ -45,7 +45,8 @@ class Team < ActiveRecord::Base
 	support_users.each { |user| team_users.push(user) }
 	tank_users.each { |user| team_users.push(user) }
 	dps_users.each { |user| team_users.push(user) }
-	  
+
+	
 	#remove the just added people from the queue
 	support_users.each { |user| UserLookingForTeam.destroy(user) }
 	dps_users.each { |user| UserLookingForTeam.destroy(user) }
