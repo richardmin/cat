@@ -9,7 +9,7 @@
 
     <!-- Server side setup -->
     <servers>
-        <server host="EC2 IP" port="80" type="tcp"></server>
+        <server host="EC2" port="80" type="tcp"></server>
     </servers>
 
 
@@ -17,41 +17,44 @@
         <arrivalphase phase="1" duration="30" unit="second">
             <users arrivalrate="1" unit="second"></users>
         </arrivalphase>
-    </load>
-    <load>
+
         <arrivalphase phase="2" duration="30" unit="second">
             <users arrivalrate="2" unit="second"></users>
         </arrivalphase>
-    </load>
-    <load>
+
         <arrivalphase phase="3" duration="30" unit="second">
-            <userrs arrivalate="4" unit="second"></users>
+            <users arrivalrate="4" unit="second"></users>
         </arrivalphase>
+
+        <arrivalphase phase="4" duration="30" unit="second">
+            <users arrivalrate="8" unit="second"></users>
+        </arrivalphase>
+
+        <arrivalphase phase="5" duration="30" unit="second">
+            <users arrivalrate="16" unit="second"></users>
+        </arrivalphase>
+
+        <arrivalphase phase="6" duration="30" unit="second">
+             <users arrivalrate="32" unit="second"></users>
+        </arrivalphase>
+
+        <arrivalphase phase="7" duration="30" unit="second">
+             <users arrivalrate="64" unit="second"></users>
+        </arrivalphase>
+
+        <arrivalphase phase="8" duration="30" unit="second">
+             <users arrivalrate="128" unit="second"></users>
+        </arrivalphase>
+
+        <arrivalphase phase="9" duration="30" unit="second">
+            <users arrivalrate="256" unit="second"></users>
+        </arrivalphase>
+
+        <arrivalphase phase="10" duration="30" unit="second">
+            <users arrivalrate="512" unit="second"></users>
+        </arrivalphase>
+
     </load>
-    <arrivalphase phase="3" duration="30" unit="second">
-        <users arrivalrate="4" unit="second"></users>
-    </arrivalphase>
-    <arrivalphase phase="4" duration="30" unit="second">
-        <users arrivalrate="8" unit="second"></users>
-    </arrivalphase>
-    <arrivalphase phase="5" duration="30" unit="second">
-        <users arrivalrate="16" unit="second"></users>
-    </arrivalphase>
-    <arrivalphase phase="6" duration="30" unit="second">
-        <users arrivalrate="32" unit="second"></users>
-    </arrivalphase>
-    <arrivalphase phase="7" duration="30" unit="second">
-        <users arrivalrate="64" unit="second"></users>
-    </arrivalphase>
-    <arrivalphase phase="8" duration="30" unit="second">
-        <users arrivalrate="128" unit="second"></users>
-    </arrivalphase>
-    <arrivalphase phase="9" duration="30" unit="second">
-        <users arrivalrate="256" unit="second"></users>
-    </arrivalphase>
-    <arrivalphase phase="10" duration="30" unit="second">
-        <users arrivalrate="512" unit="second"></users>
-    </arrivalphase>
 
     <options>
         <!-- Set connection timeout to 2 seconds -->
@@ -160,16 +163,15 @@
                 
                 <request subst="true">
                     <http
-                        url='/comments/'
+                        url='/comments'
                         version='1.1'
                         method='POST'
-                        contents='utf8=%E2%9C%93&amp;authenticity_token=%%_authenticity_token%%&amp;3D%3D&comment%5Bbody%5D=%%random_comment%%&amp;commit=Post'>
+                        contents='utf8=%E2%9C%93&amp;authenticity_token=%%_authenticity_token%%&amp;3D%3D&amp;comment%5Bbody%5D=%%random_comment%%&amp;commit=Post'>
                     </http>
                 </request>
                 
             </for>
-            
-            
+
         </session>
     </sessions>
 </tsung>
