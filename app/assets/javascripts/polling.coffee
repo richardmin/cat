@@ -9,9 +9,8 @@ window.Poller = {
       , timeout || 3000
   clear: -> clearTimeout(this.pollTimeout)
   request: ->
-    first_id = $('.comment').first().data('id')
-    # team_id = 1
-    $.get('/comments', {after_id: first_id, team_id: 1})
+    first_id = $('.comment').last().data('id')
+    $.get('/comments', after_id: first_id)
 }
 
 jQuery ->
