@@ -5,12 +5,12 @@ class CommentsController < ApplicationController
 
   def new
     @comment = Comment.new
-    @comments = Comment.order('created_at DESC')
+    @comments = Comment.order('created_at ASC')
   end
 
   def create
     respond_to do |format|
-      if current_user 
+      if current_user
         @comment = current_user.comments.build(comment_params)
         if @comment.save
           flash.now[:success] = 'Your comment was successfully posted!'
