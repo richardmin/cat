@@ -8,8 +8,16 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up) do |u|
-      u.permit(:email, :battlenetid, :password)
+    permitted_params = [:email, :password, :password_confirmation, :battlenetid]
+
+    if params[:action] == 'update'
+      devise_parameter_sanitizer.permit(:account_update) do
+        |u| u.permit(permitted_params << :current_password)
+      end
+    elsif params[:action] == 'create'
+      devise_parameter_sanitizer.permit(:sign_up) do
+        |u| u.permit(permitted_params)
+      end
     end
   end
 end
