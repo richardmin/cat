@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
 
   def create
     respond_to do |format|
-      if current_user
+      if current_user 
         @comment = current_user.comments.build(comment_params)
         if @comment.save
           flash.now[:success] = 'Your comment was successfully posted!'
@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
         format.js
       else
         format.html {redirect_to new_comment_path}
-        format.js {render nothing: true}
+        format.js {render :content_type => 'text/javascript'}
       end
     end
   end
