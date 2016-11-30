@@ -21,7 +21,7 @@
             <users arrivalrate="2" unit="second"></users>
         </arrivalphase>
         <arrivalphase phase="3" duration="30" unit="second">
-            <userrs arrivalate="4" unit="second"></users>
+            <users arrivalate="4" unit="second"></users>
         </arrivalphase>
     <arrivalphase phase="3" duration="30" unit="second">
         <users arrivalrate="4" unit="second"></users>
