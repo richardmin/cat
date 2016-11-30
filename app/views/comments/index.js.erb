@@ -1,6 +1,7 @@
 
 $('#comments').find('.media-list').append('<%= j render @comments %>');
 <% if not @comments.empty? %> 
-    $('#comments').animate({scrollTop: document.getElementById("comments").scrollHeight}, "slow")
+    if(!scrolled)
+        $('#comments').animate({scrollTop: document.getElementById("comments").scrollHeight}, "slow")
 <% end %>
 Poller.poll();

@@ -19,7 +19,7 @@ window.TeamPoller = {
             if data != -1
                 window.location = "/comments/new?team=" + data
             else 
-              if window.location.pathname == "/teams/new" #this makes it so that you only poll in teams/new
+              # if window.location.pathname == "/teams/new" #this makes it so that you only poll in teams/new
                 TeamPoller.poll()
 }
 
