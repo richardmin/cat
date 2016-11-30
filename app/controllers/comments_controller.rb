@@ -21,17 +21,10 @@ class CommentsController < ApplicationController
         else
           flash.now[:error] = 'Your comment cannot be saved.'
         end
-        # format.html {redirect_to new_comment_path, team_id: params[:team_id]}
-        # format.html {redirect_to "/comments/new?team_id=#{params[:team_id]}"}
-
-        puts "this is output"
-        puts params
-        format.html {redirect_to "/comments/new?team_id=#{params[:team_id]}"}
+        format.html {redirect_to "/comments/new?team_id=#{params[:comment][:team_id]}"}
         format.js
       else
-        puts "this is output"
-        puts params
-        format.html {redirect_to "/comments/new?team_id=#{params[:team_id]}"}
+        format.html {redirect_to "/comments/new?team_id=#{params[:comment][:team_id]}"}
         format.js {render :content_type => 'text/javascript'}
       end
     end
