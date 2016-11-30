@@ -5,7 +5,8 @@ class CommentsController < ApplicationController
 
   def new
     @comment = Comment.new
-    @comments = Comment.order('created_at ASC')
+    #@comments = Comment.order('created_at ASC')
+    @comments = Comment.where('team_id = ?', params[:team_id].to_s).order('created_at ASC')
   end
 
   def create
