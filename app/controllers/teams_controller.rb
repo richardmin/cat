@@ -45,6 +45,7 @@ class TeamsController < ApplicationController
 
 
   def checkTeam()
+  
     @checkTeam = -1
     check1 = Team.find_by(user1: current_user.id)
     check2 = Team.find_by(user2: current_user.id)
