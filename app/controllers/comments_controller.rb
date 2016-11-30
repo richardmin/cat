@@ -5,6 +5,7 @@ class CommentsController < ApplicationController
   end
 
   def new
+    @team_id = params[:team_id]
     @comment = Comment.new
     @comments = Comment.order('created_at ASC')
   end
