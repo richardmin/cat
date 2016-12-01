@@ -26,7 +26,7 @@ class TeamsController < ApplicationController
     teamConfig = TeamConfig.first #can change between default team configuration. see db migrations for queue   
     @team = Team.new_for(teamConfig)
     respond_to do |format|
-      flash[:success] = "Entering Queue as Role#{params[:role]}" 
+      flash.now[:success] = "Entering Queue as Role: #{params[:role]}".titleize 
       format.html 
     end
 
