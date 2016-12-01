@@ -28,11 +28,17 @@ input, button, select, textarea, optgroup, option {
 
 body {
   padding-top: 75px;
-  background-color: $dark-gray;
+  background-color: $dark-gray;/*
   background-image: url("bg.jpg");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 1600px 900px;
+  background-size: 1600px 900px;*/
+
+  background: asset-url("bg.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 section {
