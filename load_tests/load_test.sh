@@ -8,5 +8,5 @@ if [ $? -eq 0 ]; then
     tsung_stats.pl
     echo "success"
 else
-    echo "fail""
+    echo "fail"
 fi

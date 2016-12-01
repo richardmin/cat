@@ -1,4 +1,3 @@
-
 window.Poller = {
   poll: (timeout) ->
     if timeout is 0
