@@ -7,4 +7,7 @@ class User < ActiveRecord::Base
 
   has_one :UserLookingForTeam, dependent: :destroy
 
+  validates :battlenetid, presence: true
+  validates :battlenetid, uniqueness: true, if: -> {self.battlenetid.present? }
+
 end

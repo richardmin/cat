@@ -15,7 +15,7 @@ window.TeamPoller = {
         error: (jqXHR, textStatus, errorThrown) ->
         success: (data, textStatus, jqXHR) ->
             if data != -1
-                window.location = "/comments/new?team=" + data
+                window.location = "/comments/new?team_id=" + data
             else 
               # if window.location.pathname == "/teams/new" #this makes it so that you only poll in teams/new
                 TeamPoller.poll()
