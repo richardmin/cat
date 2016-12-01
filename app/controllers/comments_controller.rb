@@ -17,7 +17,6 @@ class CommentsController < ApplicationController
         
         if @comment.save
           flash.now[:success] = 'Your comment was successfully posted!'
-          puts @comment.body
         else
           flash.now[:error] = 'Your comment cannot be saved.'
         end
