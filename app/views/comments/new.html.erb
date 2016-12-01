@@ -11,10 +11,12 @@
     <div class="panel-body">
       <ul class="media-list">
         <%= render @comments %>
+        
       </ul>
     </div>
   </div>
     <%= render 'form', team_id: @team_id %>
+
     <% else %>
     <div class="page-header">
       <h1> You don't have permission to access this team</h1>
