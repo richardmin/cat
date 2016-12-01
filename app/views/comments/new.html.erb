@@ -1,7 +1,9 @@
 
 <% if current_user %>
+  <% if @team_id %>
   <div class="page-header">
-    <h1>Join the discussion!</h1>
+
+    <h1>Match with your teammates!</h1>
   </div>
 
 
@@ -9,10 +11,17 @@
     <div class="panel-body">
       <ul class="media-list">
         <%= render @comments %>
+        
       </ul>
     </div>
   </div>
-    <%= render 'form' %>
+    <%= render 'form', team_id: @team_id %>
+
+    <% else %>
+    <div class="page-header">
+      <h1> You don't have permission to access this team</h1>
+    </div>
+  <% end %>
 <% else %>
   <%= render 'welcome' %>
 <% end %>

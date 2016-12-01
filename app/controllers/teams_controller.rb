@@ -25,17 +25,8 @@ class TeamsController < ApplicationController
 
     teamConfig = TeamConfig.first #can change between default team configuration. see db migrations for queue   
     @team = Team.new_for(teamConfig)
-=begin
-    if @team.nil?
-      flash[:error] = "Queueing as role " + params[:role]
-      redirect_to join_game_url
-    else
-      flash[:success] = @team
-      redirect_to join_game_url #redirect_to_chat?
-    end
-=end
     respond_to do |format|
-      flash[:error] = "Queueing as role " + params[:role]
+      flash.now[:success] = "Entering Queue as Role: #{params[:role]}".titleize
       format.html 
     end
 
