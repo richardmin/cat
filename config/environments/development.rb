@@ -35,8 +35,8 @@ Rails.application.configure do
   # Checks for improperly declared sprockets dependencies.
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
-  config.serve_static_assets = false
-  config.assets.compile = false
+  config.serve_static_files = false
+  config.assets.compile = true
   config.assets.digest = true
 
 

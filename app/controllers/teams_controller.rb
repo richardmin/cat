@@ -36,7 +36,6 @@ class TeamsController < ApplicationController
 =end
     respond_to do |format|
       flash[:error] = "Queueing as role " + params[:role]
-      flash[:success] = @team 
       format.html 
     end
 

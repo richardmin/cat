@@ -13,9 +13,9 @@ window.TeamPoller = {
         type: 'GET'
         dataType: 'json'
         error: (jqXHR, textStatus, errorThrown) ->
-            $('body').append jqXHR.responseText
+            # $('body').append jqXHR.responseText
         success: (data, textStatus, jqXHR) ->
-            $('body').append window.location.pathname
+            # $('body').append window.location.pathname
             if data != -1
                 window.location = "/comments/new?team=" + data
             else 

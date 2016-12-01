@@ -1,9 +1,9 @@
 <div class="center jumbotron">
-  <%= image_tag("ow_logo.png", :alt => "Overwatch Logo") %>
+  <%= image_tag("ow_logo.png", :alt => "Ov") %>
   <h1>Welcome to the Overwatch Matchmaker</h1>
-
+  <br>
   <%= link_to "Sign up now!", sign_up_path, class: "btn btn-lg btn-primary" %>
-  
+
   <% if user_signed_in? %>
     <%= link_to "Join Game!", join_game_path, class: "btn btn-lg btn-primary" %>
   <% else %>

@@ -1,5 +1,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import url('https://fonts.googleapis.com/css?family=News+Cycle');
+@import url('https://fonts.googleapis.com/css?family=Ek+Mukta|News+Cycle');
 
 /* mixins, variables, etc. */
 
@@ -13,7 +15,7 @@ $white: #f8faff;
 html, body, form, fieldset, table, tr, td, img {
   margin: 0;
   padding: 0;
-  font: 100%/150% "Trebuchet MS", Helvetica, sans-serif;
+  font: 100%/150% 'News Cycle', sans-serif;
   font-weight: lighter;
 }
 
@@ -28,6 +30,9 @@ body {
   padding-top: 75px;
   background-color: $dark-gray;
   background-image: url("bg.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 1600px 900px;
 }
 
 section {
@@ -46,12 +51,12 @@ textarea {
 }
 
 .container .jumbotron {
-  background-color: rgba(255,255,255,0.4);
+  background-color: rgba(255,255,255,0.65);
   border-radius: 0px;
 }
 
 .form-box {
-  background-color: rgba(255,255,255,0.5);
+  background-color: rgba(255,255,255,0.6);
   width: 60%;
   padding-bottom: 15px;
   //margin-right: 20%;
@@ -93,6 +98,24 @@ textarea {
   box-shadow: 0px 1px 7px #ffffff;
 }
 
+/* flash */
+.alert {
+  background-color: rgba(180, 242, 169, .6);
+  font-weight: bold;
+  -moz-border-radius: 4px 4px 4px 4px;
+  -webkit-border-radius: 4px 4px 4px 4px;
+  border-radius: 4px 4px 4px 4px;
+  margin-bottom: 18px;
+  padding: 12px 25px 12px 24px;
+}
+.alert-success {
+  background-color: #66E167;
+  border-color: #D6E9C6;
+  width: 280px;
+  color: black;
+  padding-top: 20px;
+}
+
 /* typography */
 
 h1, h2, h3, h4, h5, h6 {
@@ -104,8 +127,9 @@ h1 {
   letter-spacing: -2px;
   margin-bottom: 30px;
   text-align: center;
-  color: $white !important;
-  text-shadow: 2px 2px 2px $dark-gray;
+  color: $dark-blue !important;
+  //-webkit-text-stroke: 1px $dark-gray;
+  //font-family: 'Ek Mukta', sans-serif;
 }
 
 h2 {
