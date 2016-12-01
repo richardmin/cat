@@ -28,12 +28,7 @@ input, button, select, textarea, optgroup, option {
 
 body {
   padding-top: 75px;
-  background-color: $dark-gray;/*
-  background-image: url("bg.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 1600px 900px;*/
-
+  background-color: $dark-gray;
   background: asset-url("bg.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -57,7 +52,7 @@ textarea {
 }
 
 .container .jumbotron {
-  background-color: rgba(255,255,255,0.65);
+  background-color: rgba(255,255,255,0.75);
   border-radius: 0px;
 }
 
